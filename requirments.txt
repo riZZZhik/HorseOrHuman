@@ -1,0 +1,5 @@
+numpy
+
+tensorflow
+tensorflow-datasets
+keras

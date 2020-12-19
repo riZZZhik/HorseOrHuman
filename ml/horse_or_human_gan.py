@@ -7,6 +7,7 @@ from keras.layers import Input, LeakyReLU, BatchNormalization, Flatten, Dense, R
 from keras.models import Model
 from keras.optimizers import Adam
 from keras_preprocessing.image import ImageDataGenerator
+from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from .logger import get_logger
 from .utils import *
@@ -33,7 +34,7 @@ class HorseOrHumanGAN:
 
         # Initialize class variables
         self.batch_size = batch_size
-        self.input_shape = (300, 300 ,3)
+        self.input_shape = (300, 300, 3)
         self.volume_size = None
 
         # Download and prepare dataset
@@ -156,3 +157,15 @@ class HorseOrHumanGAN:
         decoder = Model(latent_input, outputs, name="decoder")
 
         return decoder
+
+    def train(self, epochs):
+        callbacks = [EarlyStopping(monitor='val_loss', min_delta=0, patience=0, verbose=0,
+                                   mode='auto', baseline=None, restore_best_weights=False),
+                     ModelCheckpoint('autoencoder_weights.hdf5', monitor='val_loss', verbose=1, save_best_only=True,
+                                     mode='min')]
+
+        self.autoencoder.fit_generator(self.train_generator, epochs=epochs, callbacks=callbacks)
+        self.autoencoder.save_weights("autoencoder_weights.hdf5")
+
+        self.encoder = self.autoencoder[:len(self.encoder.layers)]
+        self.encoder.save_weights("encoder_weights.hdf5")

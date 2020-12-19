@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 from keras import backend as K
 from keras.layers import Conv2D, Conv2DTranspose
@@ -6,26 +8,36 @@ from keras.models import Model
 from keras.optimizers import Adam
 from tensorflow_datasets import load
 
+from .logger import get_logger
 
 class HorseOrHumanGAN:
-    def __init__(self, input_shape, filters=(32, 64), latent_dim=16):
+    def __init__(self, batch_size=32, filters=(32, 64), latent_dim=16,
+                 log_file="logs.log", log_level=logging.INFO):
         """Class with AutoEncoder model to classify Horses and Humans
 
-        :param input_shape: Image input shape
-        :type input_shape: list or tuple
+        :param batch_size: Batch size
+        :type batch_size: int
         :param filters: Filter levels
         :type filters: list or tuple
         :param latent_dim: Number of layers in the middle of autoencoder
         :type latent_dim: int
+        :param log_file: FilePath to save logs
+        :type log_file: str
+        :param log_level: Logger level from "logging" library
+        :type log_level: logging.BASIC_FORMAT
         """
+
+        self.logger = get_logger(log_file, log_level, __name__)
+
         # Initialize class variables
         self.input_shape = input_shape
         self.volume_size = None
 
         # Prepare dataset
-        self.dataset = load("horses_or_humans")
+        self.logger.info("Initializing Dataset")
 
         # Init models
+        self.logger.info("Initializing Models")
         inputs = Input(shape=self.input_shape)
         self.encoder = self._build_encoder(filters, latent_dim, inputs)
         self.decoder = self._build_decoder(filters, latent_dim)
@@ -34,6 +46,7 @@ class HorseOrHumanGAN:
         self.optimizer = Adam()
         self.autoencoder.compile(optimizer=self.optimizer, loss="mse")
 
+        self.logger.info("Horse Or Human GAN class initialized")
     def _build_encoder(self, filters, latent_dim, inputs):
         """Function to build encoder
 

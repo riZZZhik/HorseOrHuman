@@ -1,8 +1,9 @@
 import numpy as np
 from keras import backend as K
-from keras.layers import Input, Conv2D, LeakyReLU, BatchNormalization, Flatten, Dense, Reshape, Conv2DTranspose, \
-    Activation
+from keras.layers import Conv2D, Conv2DTranspose
+from keras.layers import Input, LeakyReLU, BatchNormalization, Flatten, Dense, Reshape, Activation
 from keras.models import Model
+from keras.optimizers import Adam
 from tensorflow_datasets import load
 
 
@@ -28,7 +29,10 @@ class HorseOrHumanGAN:
         inputs = Input(shape=self.input_shape)
         self.encoder = self._build_encoder(filters, latent_dim, inputs)
         self.decoder = self._build_decoder(filters, latent_dim)
+
         self.autoencoder = Model(inputs, self.decoder(self.encoder(inputs)), name="autoencoder")
+        self.optimizer = Adam()
+        self.autoencoder.compile(optimizer=self.optimizer, loss="mse")
 
     def _build_encoder(self, filters, latent_dim, inputs):
         """Function to build encoder

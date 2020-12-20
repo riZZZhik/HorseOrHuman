@@ -15,6 +15,7 @@ from .utils import *
 
 class HorseOrHumanGAN:
     def __init__(self, batch_size=32, filters=(32, 64), latent_dim=16,
+                 dataset_dir="horses_or_humans",
                  log_file="logs.log", log_level=logging.INFO):
         """Class with AutoEncoder model to classify Horses and Humans
 
@@ -24,6 +25,8 @@ class HorseOrHumanGAN:
         :type filters: list or tuple
         :param latent_dim: Number of layers in the middle of autoencoder
         :type latent_dim: int
+        :param dataset_dir: Path to dataset directory
+        :type dataset_dir: str
         :param log_file: FilePath to save logs
         :type log_file: str
         :param log_level: Logger level from "logging" library
@@ -33,13 +36,10 @@ class HorseOrHumanGAN:
         self.logger = get_logger(log_file, log_level, __name__)
 
         # Initialize class variables
+        self.dataset_dir = dataset_dir
         self.batch_size = batch_size
         self.input_shape = (300, 300, 3)
         self.volume_size = None
-
-        # Download and prepare dataset
-        self.logger.info("Initializing Dataset")
-        self.train_generator = self._get_generator(data_type=1)
 
         # Init models
         self.logger.info("Initializing Models")
@@ -53,42 +53,41 @@ class HorseOrHumanGAN:
 
         self.logger.info("Horse Or Human GAN class initialized")
 
-    def _get_generator(self, data_type=0, dataset_dir="horses_or_humans", dataset_url=None,
-                       temp_zip_path="horses_or_humans.zip"):
-        """Function to dowmload dataset, if needed, and create generator
+    def _get_generator(self, data_type=0,  dataset_url=None, temp_zip_path="horses_or_humans.zip"):  # TODO: Add val
+        """Function to download dataset, if needed, and create generator
 
-        :param data_type: Type of data (0 - labeled as in dir, 1 - input=output for autoencoders)
+        :param data_type: Type of data (0 - labeled as in dir; 1 - input=output, for autoencoders)
         :type data_type: int
-        :param dataset_dir: Path to dataset directory
-        :type dataset_dir: str
         :param dataset_url: Url path to dataset
         :type dataset_url: str
         :param temp_zip_path: Path to temporary save zip file of dataset, if needed
         :type temp_zip_path: str
         """
-        assert data_type in (1, 2), f"data_type is {data_type}, but can be only 0 or 1"
+        self.logger.info("Initializing Dataset")
+        assert data_type in (1, 2), f"data_type is {data_type}, but can only be 0 or 1"
 
         if dataset_url is None:
+            self.logger.info("Downloading dataset from server")
             dataset_url = "https://storage.googleapis.com/download.tensorflow.org/data/horse-or-human.zip"
 
-        if os.path.exists(dataset_dir):
+        if os.path.exists(self.dataset_dir):
             pass  # TODO: Check dataset path
         else:
             download_file(dataset_url, temp_zip_path)
             if dataset_url.endswith("zip"):
-                unzip_archive(temp_zip_path, dataset_dir)
+                unzip_archive(temp_zip_path, self.dataset_dir)
 
         train_datagen = ImageDataGenerator(rescale=1. / 255)
 
         if data_type == 0:
             return train_datagen.flow_from_directory(
-                dataset_dir,
+                self.dataset_dir,
                 target_size=self.input_shape[:2],
                 batch_size=self.batch_size,
                 shuffle=True)
         elif data_type == 1:
             return train_datagen.flow_from_directory(
-                dataset_dir,
+                self.dataset_dir,
                 target_size=self.input_shape[:2],
                 batch_size=self.batch_size,
                 class_mode="input",
@@ -158,14 +157,14 @@ class HorseOrHumanGAN:
 
         return decoder
 
-    def train(self, epochs):
-        callbacks = [EarlyStopping(monitor='val_loss', min_delta=0, patience=0, verbose=0,
-                                   mode='auto', baseline=None, restore_best_weights=False),
-                     ModelCheckpoint('autoencoder_weights.hdf5', monitor='val_loss', verbose=1, save_best_only=True,
-                                     mode='min')]
+    def train_autoencoder(self, epochs):
+        """Function to train autoencoder
 
-        self.autoencoder.fit_generator(self.train_generator, epochs=epochs, callbacks=callbacks)
-        self.autoencoder.save_weights("autoencoder_weights.hdf5")
+        :param epochs: Number of epochs
+        :type epochs: int
+        """
+        callbacks = [EarlyStopping(monitor='loss', patience=10),
+                     ModelCheckpoint('autoencoder_weights.hdf5', monitor='loss', save_best_only=True, verbose=1)]
 
-        self.encoder = self.autoencoder[:len(self.encoder.layers)]
-        self.encoder.save_weights("encoder_weights.hdf5")
+        generator = self._get_generator(data_type=1)
+        self.autoencoder.fit(generator, epochs=epochs, callbacks=callbacks)

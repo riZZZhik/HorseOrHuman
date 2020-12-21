@@ -278,6 +278,11 @@ Temporary Items
 pyvenv.cfg
 pip-selfcheck.json
 
+# User ignores
 horses_or_humans.zip
-
 horses_or_humans/
+
+*.hdf5
+
+*.log
+*_prediction.*

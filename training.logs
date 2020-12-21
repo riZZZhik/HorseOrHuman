@@ -1,0 +1,404 @@
+19-Dec-20 23:21:32 - INFO: Initializing Dataset
+19-Dec-20 23:21:35 - INFO: Initializing Models
+Found 1027 images belonging to 2 classes.
+19-Dec-20 23:21:36 - INFO: Horse Or Human GAN class initialized
+Epoch 1/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0883
+
+Epoch 00001: loss improved from inf to 0.06382, saving model to autoencoder_weights.hdf5
+Epoch 2/100
+33/33 [==============================] - 240s 7s/step - loss: 0.0394
+
+Epoch 00002: loss improved from 0.06382 to 0.03827, saving model to autoencoder_weights.hdf5
+Epoch 3/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0337
+
+Epoch 00003: loss improved from 0.03827 to 0.03232, saving model to autoencoder_weights.hdf5
+Epoch 4/100
+33/33 [==============================] - 237s 7s/step - loss: 0.0293
+
+Epoch 00004: loss improved from 0.03232 to 0.02867, saving model to autoencoder_weights.hdf5
+Epoch 5/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0260
+
+Epoch 00005: loss improved from 0.02867 to 0.02599, saving model to autoencoder_weights.hdf5
+Epoch 6/100
+33/33 [==============================] - 234s 7s/step - loss: 0.0273
+
+Epoch 00006: loss improved from 0.02599 to 0.02551, saving model to autoencoder_weights.hdf5
+Epoch 7/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0238
+
+Epoch 00007: loss improved from 0.02551 to 0.02406, saving model to autoencoder_weights.hdf5
+Epoch 8/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0228
+
+Epoch 00008: loss improved from 0.02406 to 0.02298, saving model to autoencoder_weights.hdf5
+Epoch 9/100
+33/33 [==============================] - 242s 8s/step - loss: 0.0236
+
+Epoch 00009: loss improved from 0.02298 to 0.02275, saving model to autoencoder_weights.hdf5
+Epoch 10/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0218
+
+Epoch 00010: loss improved from 0.02275 to 0.02209, saving model to autoencoder_weights.hdf5
+Epoch 11/100
+33/33 [==============================] - 239s 7s/step - loss: 0.0220
+
+Epoch 00011: loss improved from 0.02209 to 0.02189, saving model to autoencoder_weights.hdf5
+Epoch 12/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0211
+
+Epoch 00012: loss improved from 0.02189 to 0.02105, saving model to autoencoder_weights.hdf5
+Epoch 13/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0208
+
+Epoch 00013: loss did not improve from 0.02105
+Epoch 14/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0207
+
+Epoch 00014: loss did not improve from 0.02105
+Epoch 15/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0194
+
+Epoch 00015: loss improved from 0.02105 to 0.01935, saving model to autoencoder_weights.hdf5
+Epoch 16/100
+33/33 [==============================] - 239s 7s/step - loss: 0.0183
+
+Epoch 00016: loss improved from 0.01935 to 0.01859, saving model to autoencoder_weights.hdf5
+Epoch 17/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0178
+
+Epoch 00017: loss did not improve from 0.01859
+Epoch 18/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0180
+
+Epoch 00018: loss improved from 0.01859 to 0.01834, saving model to autoencoder_weights.hdf5
+Epoch 19/100
+33/33 [==============================] - 247s 7s/step - loss: 0.0183
+
+Epoch 00019: loss improved from 0.01834 to 0.01833, saving model to autoencoder_weights.hdf5
+Epoch 20/100
+33/33 [==============================] - 250s 8s/step - loss: 0.0172
+
+Epoch 00020: loss improved from 0.01833 to 0.01732, saving model to autoencoder_weights.hdf5
+Epoch 21/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0171
+
+Epoch 00021: loss did not improve from 0.01732
+Epoch 22/100
+33/33 [==============================] - 239s 7s/step - loss: 0.0168
+
+Epoch 00022: loss improved from 0.01732 to 0.01714, saving model to autoencoder_weights.hdf5
+Epoch 23/100
+33/33 [==============================] - 243s 7s/step - loss: 0.0158
+
+Epoch 00023: loss improved from 0.01714 to 0.01624, saving model to autoencoder_weights.hdf5
+Epoch 24/100
+33/33 [==============================] - 237s 7s/step - loss: 0.0166
+
+Epoch 00024: loss did not improve from 0.01624
+Epoch 25/100
+33/33 [==============================] - 240s 7s/step - loss: 0.0160
+
+Epoch 00025: loss did not improve from 0.01624
+Epoch 26/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0160
+
+Epoch 00026: loss improved from 0.01624 to 0.01593, saving model to autoencoder_weights.hdf5
+Epoch 27/100
+33/33 [==============================] - 240s 7s/step - loss: 0.0146
+
+Epoch 00027: loss improved from 0.01593 to 0.01514, saving model to autoencoder_weights.hdf5
+Epoch 28/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0145
+
+Epoch 00028: loss improved from 0.01514 to 0.01507, saving model to autoencoder_weights.hdf5
+Epoch 29/100
+33/33 [==============================] - 237s 7s/step - loss: 0.0144
+
+Epoch 00029: loss improved from 0.01507 to 0.01474, saving model to autoencoder_weights.hdf5
+Epoch 30/100
+33/33 [==============================] - 243s 7s/step - loss: 0.0137
+
+Epoch 00030: loss improved from 0.01474 to 0.01453, saving model to autoencoder_weights.hdf5
+Epoch 31/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0150
+
+Epoch 00031: loss did not improve from 0.01453
+Epoch 32/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0140
+
+Epoch 00032: loss improved from 0.01453 to 0.01448, saving model to autoencoder_weights.hdf5
+Epoch 33/100
+33/33 [==============================] - 243s 7s/step - loss: 0.0145
+
+Epoch 00033: loss did not improve from 0.01448
+Epoch 34/100
+33/33 [==============================] - 236s 7s/step - loss: 0.0142
+
+Epoch 00034: loss improved from 0.01448 to 0.01430, saving model to autoencoder_weights.hdf5
+Epoch 35/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0139
+
+Epoch 00035: loss improved from 0.01430 to 0.01413, saving model to autoencoder_weights.hdf5
+Epoch 36/100
+33/33 [==============================] - 243s 7s/step - loss: 0.0131
+
+Epoch 00036: loss improved from 0.01413 to 0.01344, saving model to autoencoder_weights.hdf5
+Epoch 37/100
+33/33 [==============================] - 235s 7s/step - loss: 0.0123
+
+Epoch 00037: loss improved from 0.01344 to 0.01250, saving model to autoencoder_weights.hdf5
+Epoch 38/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0131
+
+Epoch 00038: loss did not improve from 0.01250
+Epoch 39/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0130
+
+Epoch 00039: loss did not improve from 0.01250
+Epoch 40/100
+33/33 [==============================] - 243s 7s/step - loss: 0.0124
+
+Epoch 00040: loss did not improve from 0.01250
+Epoch 41/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0137
+
+Epoch 00041: loss did not improve from 0.01250
+Epoch 42/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0123
+
+Epoch 00042: loss did not improve from 0.01250
+Epoch 43/100
+33/33 [==============================] - 237s 7s/step - loss: 0.0113
+
+Epoch 00043: loss improved from 0.01250 to 0.01196, saving model to autoencoder_weights.hdf5
+Epoch 44/100
+33/33 [==============================] - 239s 7s/step - loss: 0.0125
+
+Epoch 00044: loss did not improve from 0.01196
+Epoch 45/100
+33/33 [==============================] - 240s 7s/step - loss: 0.0126
+
+Epoch 00045: loss did not improve from 0.01196
+Epoch 46/100
+33/33 [==============================] - 247s 7s/step - loss: 0.0120
+
+Epoch 00046: loss did not improve from 0.01196
+Epoch 47/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0119
+
+Epoch 00047: loss did not improve from 0.01196
+Epoch 48/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0117
+
+Epoch 00048: loss improved from 0.01196 to 0.01170, saving model to autoencoder_weights.hdf5
+Epoch 49/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0116
+
+Epoch 00049: loss did not improve from 0.01170
+Epoch 50/100
+33/33 [==============================] - 237s 7s/step - loss: 0.0121
+
+Epoch 00050: loss did not improve from 0.01170
+Epoch 51/100
+33/33 [==============================] - 248s 7s/step - loss: 0.0114
+
+Epoch 00051: loss did not improve from 0.01170
+Epoch 52/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0118
+
+Epoch 00052: loss improved from 0.01170 to 0.01148, saving model to autoencoder_weights.hdf5
+Epoch 53/100
+33/33 [==============================] - 234s 7s/step - loss: 0.0105
+
+Epoch 00053: loss improved from 0.01148 to 0.01103, saving model to autoencoder_weights.hdf5
+Epoch 54/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0105
+
+Epoch 00054: loss did not improve from 0.01103
+Epoch 55/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0110
+
+Epoch 00055: loss improved from 0.01103 to 0.01101, saving model to autoencoder_weights.hdf5
+Epoch 56/100
+33/33 [==============================] - 248s 7s/step - loss: 0.0112
+
+Epoch 00056: loss did not improve from 0.01101
+Epoch 57/100
+33/33 [==============================] - 238s 7s/step - loss: 0.0111
+
+Epoch 00057: loss did not improve from 0.01101
+Epoch 58/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0106
+
+Epoch 00058: loss improved from 0.01101 to 0.01075, saving model to autoencoder_weights.hdf5
+Epoch 59/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0107
+
+Epoch 00059: loss did not improve from 0.01075
+Epoch 60/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0105
+
+Epoch 00060: loss did not improve from 0.01075
+Epoch 61/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0108
+
+Epoch 00061: loss improved from 0.01075 to 0.01040, saving model to autoencoder_weights.hdf5
+Epoch 62/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0113
+
+Epoch 00062: loss did not improve from 0.01040
+Epoch 63/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0101
+
+Epoch 00063: loss improved from 0.01040 to 0.01038, saving model to autoencoder_weights.hdf5
+Epoch 64/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0095
+
+Epoch 00064: loss improved from 0.01038 to 0.00963, saving model to autoencoder_weights.hdf5
+Epoch 65/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0100
+
+Epoch 00065: loss did not improve from 0.00963
+Epoch 66/100
+33/33 [==============================] - 241s 7s/step - loss: 0.0093
+
+Epoch 00066: loss did not improve from 0.00963
+Epoch 67/100
+33/33 [==============================] - 242s 7s/step - loss: 0.0097
+
+Epoch 00067: loss did not improve from 0.00963
+Epoch 68/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0096
+
+Epoch 00068: loss did not improve from 0.00963
+Epoch 69/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0095
+
+Epoch 00069: loss improved from 0.00963 to 0.00951, saving model to autoencoder_weights.hdf5
+Epoch 70/100
+33/33 [==============================] - 248s 7s/step - loss: 0.0093
+
+Epoch 00070: loss improved from 0.00951 to 0.00942, saving model to autoencoder_weights.hdf5
+Epoch 71/100
+33/33 [==============================] - 235s 7s/step - loss: 0.0093
+
+Epoch 00071: loss did not improve from 0.00942
+Epoch 72/100
+33/33 [==============================] - 239s 7s/step - loss: 0.0089
+
+Epoch 00072: loss improved from 0.00942 to 0.00937, saving model to autoencoder_weights.hdf5
+Epoch 73/100
+33/33 [==============================] - 240s 7s/step - loss: 0.0088
+
+Epoch 00073: loss improved from 0.00937 to 0.00920, saving model to autoencoder_weights.hdf5
+Epoch 74/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0087
+
+Epoch 00074: loss improved from 0.00920 to 0.00904, saving model to autoencoder_weights.hdf5
+Epoch 75/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0101
+
+Epoch 00075: loss did not improve from 0.00904
+Epoch 76/100
+33/33 [==============================] - 248s 8s/step - loss: 0.0091
+
+Epoch 00076: loss did not improve from 0.00904
+Epoch 77/100
+33/33 [==============================] - 248s 8s/step - loss: 0.0085
+
+Epoch 00077: loss improved from 0.00904 to 0.00888, saving model to autoencoder_weights.hdf5
+Epoch 78/100
+33/33 [==============================] - 239s 7s/step - loss: 0.0086
+
+Epoch 00078: loss improved from 0.00888 to 0.00876, saving model to autoencoder_weights.hdf5
+Epoch 79/100
+33/33 [==============================] - 254s 8s/step - loss: 0.0081
+
+Epoch 00079: loss improved from 0.00876 to 0.00842, saving model to autoencoder_weights.hdf5
+Epoch 80/100
+33/33 [==============================] - 248s 7s/step - loss: 0.0086
+
+Epoch 00080: loss did not improve from 0.00842
+Epoch 81/100
+33/33 [==============================] - 248s 7s/step - loss: 0.0087
+
+Epoch 00081: loss did not improve from 0.00842
+Epoch 82/100
+33/33 [==============================] - 250s 8s/step - loss: 0.0087
+
+Epoch 00082: loss did not improve from 0.00842
+Epoch 83/100
+33/33 [==============================] - 245s 7s/step - loss: 0.0081
+
+Epoch 00083: loss did not improve from 0.00842
+Epoch 84/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0087
+
+Epoch 00084: loss did not improve from 0.00842
+Epoch 85/100
+33/33 [==============================] - 250s 8s/step - loss: 0.0094
+
+Epoch 00085: loss did not improve from 0.00842
+Epoch 86/100
+33/33 [==============================] - 246s 7s/step - loss: 0.0090
+
+Epoch 00086: loss did not improve from 0.00842
+Epoch 87/100
+33/33 [==============================] - 247s 8s/step - loss: 0.0093
+
+Epoch 00087: loss did not improve from 0.00842
+Epoch 88/100
+33/33 [==============================] - 254s 8s/step - loss: 0.0087
+
+Epoch 00088: loss did not improve from 0.00842
+Epoch 89/100
+33/33 [==============================] - 243s 7s/step - loss: 0.0082
+
+Epoch 00089: loss improved from 0.00842 to 0.00840, saving model to autoencoder_weights.hdf5
+Epoch 90/100
+33/33 [==============================] - 251s 8s/step - loss: 0.0077
+
+Epoch 00090: loss improved from 0.00840 to 0.00810, saving model to autoencoder_weights.hdf5
+Epoch 91/100
+33/33 [==============================] - 252s 8s/step - loss: 0.0077
+
+Epoch 00091: loss did not improve from 0.00810
+Epoch 92/100
+33/33 [==============================] - 257s 8s/step - loss: 0.0082
+
+Epoch 00092: loss did not improve from 0.00810
+Epoch 93/100
+33/33 [==============================] - 240s 7s/step - loss: 0.0095
+
+Epoch 00093: loss did not improve from 0.00810
+Epoch 94/100
+33/33 [==============================] - 250s 8s/step - loss: 0.0082
+
+Epoch 00094: loss did not improve from 0.00810
+Epoch 95/100
+33/33 [==============================] - 251s 8s/step - loss: 0.0082
+
+Epoch 00095: loss did not improve from 0.00810
+Epoch 96/100
+33/33 [==============================] - 248s 7s/step - loss: 0.0090
+
+Epoch 00096: loss did not improve from 0.00810
+Epoch 97/100
+33/33 [==============================] - 247s 7s/step - loss: 0.0089
+
+Epoch 00097: loss did not improve from 0.00810
+Epoch 98/100
+33/33 [==============================] - 247s 7s/step - loss: 0.0085
+
+Epoch 00098: loss improved from 0.00810 to 0.00808, saving model to autoencoder_weights.hdf5
+Epoch 99/100
+33/33 [==============================] - 244s 7s/step - loss: 0.0077
+
+Epoch 00099: loss did not improve from 0.00808
+Epoch 100/100
+33/33 [==============================] - 251s 8s/step - loss: 0.0073
+
+Epoch 00100: loss improved from 0.00808 to 0.00743, saving model to autoencoder_weights.hdf5

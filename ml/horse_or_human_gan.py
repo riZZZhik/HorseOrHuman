@@ -5,6 +5,7 @@ from keras import backend as K
 from keras.layers import Conv2D, Conv2DTranspose
 from keras.layers import Input, LeakyReLU, BatchNormalization, Flatten, Dense, Reshape, Activation
 from keras.models import Model
+from scipy.spatial.distance import euclidean
 from keras.optimizers import Adam
 from keras_preprocessing.image import ImageDataGenerator
 from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -41,6 +42,9 @@ class HorseOrHumanGAN:
         self.input_shape = (300, 300, 3)
         self.volume_size = None
 
+        self.train_url = "https://storage.googleapis.com/download.tensorflow.org/data/horse-or-human.zip"
+        self.validate_url = "https://storage.googleapis.com/download.tensorflow.org/data/validation-horse-or-human.zip"
+
         # Init models
         self.logger.info("Initializing Models")
         inputs = Input(shape=self.input_shape)
@@ -53,29 +57,35 @@ class HorseOrHumanGAN:
 
         self.logger.info("Horse Or Human GAN class initialized")
 
-    def _get_generator(self, data_type=0,  dataset_url=None, temp_zip_path="horses_or_humans.zip"):  # TODO: Add val
+    def _get_generator(self, dataset_dir, batch_size, data_type=0,
+                       dataset_url=None, temp_zip_path="horses_or_humans.zip"):
         """Function to download dataset, if needed, and create generator
 
         :param data_type: Type of data (0 - labeled as in dir; 1 - input=output, for autoencoders)
         :type data_type: int
+        :param dataset_dir: Path to dataset dir
+        :type dataset_dir: str
         :param dataset_url: Url path to dataset
         :type dataset_url: str
         :param temp_zip_path: Path to temporary save zip file of dataset, if needed
         :type temp_zip_path: str
         """
-        self.logger.info("Initializing Dataset")
-        assert data_type in (1, 2), f"data_type is {data_type}, but can only be 0 or 1"
+        self.logger.info(f"Initializing Dataset from {dataset_dir}")
+        assert data_type in (0, 1), f"data_type is {data_type}, but can only be 0 or 1"
 
         if dataset_url is None:
             self.logger.info("Downloading dataset from server")
-            dataset_url = "https://storage.googleapis.com/download.tensorflow.org/data/horse-or-human.zip"
+            dataset_url = self.train_url
 
         if os.path.exists(self.dataset_dir):
             pass  # TODO: Check dataset path
         else:
-            download_file(dataset_url, temp_zip_path)
-            if dataset_url.endswith("zip"):
-                unzip_archive(temp_zip_path, self.dataset_dir)
+            if dataset_url:
+                download_file(dataset_url, temp_zip_path)
+                if dataset_url.endswith("zip"):
+                    unzip_archive(temp_zip_path, self.dataset_dir)
+            else:
+                raise ValueError(f"Dataset not found in {dataset_dir} dir, and dataset_url is None")
 
         train_datagen = ImageDataGenerator(rescale=1. / 255)
 
@@ -83,13 +93,14 @@ class HorseOrHumanGAN:
             return train_datagen.flow_from_directory(
                 self.dataset_dir,
                 target_size=self.input_shape[:2],
-                batch_size=self.batch_size,
+                batch_size=batch_size,
+                class_mode="binary",
                 shuffle=True)
         elif data_type == 1:
             return train_datagen.flow_from_directory(
                 self.dataset_dir,
                 target_size=self.input_shape[:2],
-                batch_size=self.batch_size,
+                batch_size=batch_size,
                 class_mode="input",
                 shuffle=True)
 
@@ -163,8 +174,81 @@ class HorseOrHumanGAN:
         :param epochs: Number of epochs
         :type epochs: int
         """
+        self.logger.info("Training autoencoder")
         callbacks = [EarlyStopping(monitor='loss', patience=10),
                      ModelCheckpoint('autoencoder_weights.hdf5', monitor='loss', save_best_only=True, verbose=1)]
 
-        generator = self._get_generator(data_type=1)
-        self.autoencoder.fit(generator, epochs=epochs, callbacks=callbacks)
+        generator = self._get_generator(self.dataset_dir, self.batch_size, data_type=1)
+        self.autoencoder.fit(generator, epochs=epochs, callbacks=callbacks)  # TODO: Add callback to save logs
+
+    def load_weights(self, autoencoder_path, autoencoder_url=None):  # TODO: Comments
+        if not os.path.exists(autoencoder_path) and autoencoder_url:
+            self.logger.info(f"Downloading weights from {autoencoder_url}")
+            download_file(autoencoder_url, autoencoder_path)
+            if autoencoder_url.endswith("zip"):
+                unzip_archive(autoencoder_path, autoencoder_path)
+
+        self.logger.info(f"Loading weights from {autoencoder_path}")
+        self.autoencoder.load_weights(autoencoder_path)  # TODO: Load weights to server
+
+    @staticmethod
+    def _image_preprocessing(images):
+        """Pre processing image before predict"""
+        images = np.array(images)
+        if len(images.shape) == 3:
+            images = np.array([images, ])
+
+        images = images.astype(np.float64) / 255
+
+        return images
+
+    @staticmethod
+    def _image_postprocessing(prediction):
+        """Post processing image after predict"""
+        result = []
+        for image in prediction:
+            image = np.array(image) * 255
+            image = image.astype(np.uint8)
+            result.append(image)
+        return result
+
+    def predict_encoder(self, images):
+        """Function to predict results from encoder
+
+        :param images: Image array
+        :type images: np.ndarray or list[np.ndarray]
+        """
+
+        images = self._image_preprocessing(images)
+        prediction = self.encoder(images)
+        return prediction
+
+    def count_distances(self, test_dataset_dir):
+        distances = {
+            "Horse_Horse": [],
+            "Human_Human": [],
+            "Horse_Human": []
+        }
+
+        generator = self._get_generator(test_dataset_dir, batch_size=2, dataset_url=self.validate_url)
+
+        for i, d in enumerate(generator):
+            if i == 10000:
+                break
+
+            data, labels = d
+            if len(data) == 2:
+                prediction = self.predict_encoder(data)
+                distance = euclidean(prediction[0], prediction[1])
+
+                if all(labels == [0, 0]):
+                    distances["Horse_Horse"].append(distance)
+                elif all(labels == [1, 1]):
+                    distances["Human_Human"].append(distance)
+                else:
+                    distances["Horse_Human"].append(distance)
+
+        for key in distances:
+            distances[key] = sum(distances[key]) / len(distances[key])
+
+        return distances
